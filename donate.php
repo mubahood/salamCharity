@@ -192,6 +192,7 @@
                                 <select name='country' id='cont' class='form-control'>
 
                                     <optgroup label='Select Countries'>
+                                        <option value='UG'>Uganda</option>
                                         <option value='AF'>Afghanistan</option>
                                         <option value='AL'>Albania</option>
                                         <option value='DZ'>Algeria</option>
@@ -397,7 +398,7 @@
                                         <option value='TM'>Turkmenistan</option>
                                         <option value='TC'>Turks and Caicos Islands</option>
                                         <option value='TV'>Tuvalu</option>
-                                        <option value='UG' <?= (['form']['country'] ? 'selected' : ''; ?>>Uganda</option>
+
                                         <option value='UA'>Ukraine</option>
                                         <option value='AE'>United Arab Emirates</option>
                                         <option value='GB'>United Kingdom</option>
