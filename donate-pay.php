@@ -1,18 +1,38 @@
 ﻿<?php
 //include function file
 include('functions.php');
+$error_message = null;
+$phone = $_SESSION['form']['phone'];
+$phone = prepare_phone_number($phone);
+if (!phone_number_is_valid($phone)) {
+    $error_message = "Invalid phone number";
+    header("Location: donate.php?error_message=$error_message");
+    exit();
+}
+$first_name = $_SESSION['form']['first_name'];
+$last_name = $_SESSION['form']['last_name'];
+$email = $_SESSION['form']['email'];
+$amount = $_SESSION['form']['amount'];
 
-
+depositFunds('zakat', $phone, $amount);
+die($phone);
+die($amount);
+/*
+    +256783204665
+    [first_name] => Muhindo
+    [last_name] => Mubaraka
+    [email] => mubahood360@gmail.com
+    [phone] => +256783204665
+    [description1] => charity
+    [amount] => 1000000
+    [paymentmode] => UGMTNMOMODIR
+    [donate] => Process Payment
+*/
 
 
 ?>
 <!doctype html>
 <html lang="en">
-
-<!-- Mirrored from protechtheme.com/edumart/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Jun 2019 15:01:20 GMT -->
-
-<!-- Mirrored from www.salamcharity.ug/charity.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 18 Oct 2020 09:16:10 GMT -->
-<!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -164,7 +184,7 @@ include('functions.php');
     <div class="container mb-0 pb-0" style="margin-top: 3rem; margin-bottom: 1rem!important; padding-bottom: 2rem">
         <div class="row">
             <div class="col-sm-12 ">
-                <h1 class="text-center ">Donate or Pay Zakat</h1>
+                <h1 class="text-center ">Confirm Payment Information</h1>
             </div>
         </div>
     </div>
@@ -172,104 +192,29 @@ include('functions.php');
     <!-- Start About -->
     <section class="about inner padding-lg " style="margin-top: 0rem!important; padding-top: 0rem!important">
         <div class="container ">
-            <?php if (isset($_SESSION['errors'])) { ?>
-                <?php if (count($_SESSION['errors']) > 0) { ?>
-                    <?php foreach ($_SESSION['errors'] as $error) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?= $error ?>
-                        </div>
-                    <?php } ?>
-                <?php } ?>
-            <?php } ?>
             <div class="row">
                 <div class="col-md-12 left-block">
-
                     <div class="cnt-block">
+                        <form action="donate-pay.php" method="POST" name="donateform">
 
+                            <div class="form-row">
 
+                                <p style="padding: 0rem; margin: 0rem"><b>First Name:</b> <?php echo $first_name; ?></p>
+                                <p style="padding: 0rem; margin: 0rem"><b>Last Name:</b> <?php echo $last_name; ?></p>
+                                <p style="padding: 0rem; margin: 0rem"><b>Email:</b> <?php echo $email; ?></p>
+                                <p style="padding: 0rem; margin: 0rem"><b>Phone:</b> <?php echo $phone; ?></p>
+                                <p style="padding: 0rem; margin: 0rem"><b>Amount:</b> <?php echo $amount; ?></p>
 
-                        <form action="donate-process.php" method="POST" name="donateform">
-
-                            <div class="form-group col-lg-6">
-                                <label for="first_name">First Name *</label>
-                                <input name="first_name" type="text" required="required" class="form-control" id="first_name" data-msg-required="Please enter your First Name."
-                                    value="<?= $_SESSION['form']['first_name'] ?? '' ?>" />
-                                <span class="text-danger"><?= $_SESSION['errors']['first_name'] ?? '' ?></span>
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <label for="last_name">Last Name *</label>
-                                <input name="last_name" type="text" required="required" class="form-control" id="last_name" data-msg-required="Please enter your Last Name."
-                                    value="<?= $_SESSION['form']['last_name'] ?? '' ?>" />
-                                <span class="text-danger"><?= $_SESSION['errors']['last_name'] ?? '' ?></span>
-                            </div>
-
-                            <div class="form-group col-lg-6">
-                                <label>Email</label>
-                                <input type="email"
-                                    value="<?= $_SESSION['form']['email'] ?? '' ?>"
-                                    data-msg-required="Please enter your Email." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <label for="phone">Phone Number *</label>
-                                <input type="text"
-                                    value="<?= $_SESSION['form']['phone'] ?? '' ?>"
-                                    data-msg-required="Please enter your Phone Number." data-msg-email="Please enter your Phone Number." maxlength="100" class="form-control" name="phone" id="phone" required>
-                            </div>
-
-                            <div class="form-group col-lg-6">
-                                <label>Select Campaign*</label>
-                                <select id="description1" name="description1" class="form-control" required="">
-                                    <option value="">Select Campaign</option>
-                                    <option value="charity">Zakat</option>
-                                    <option value="charity">Waqf</option>
-                                    <option value="donation">Donation</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-lg-6">
-                                <label for="phone">Payment Amount* (in UGX) </label>
-                                <input type="number"
-                                    value="<?= $_SESSION['form']['amount'] ?? '' ?>"
-                                    data-msg-required="Please enter your Amount." data-msg-email="Please enter your Amount." maxlength="100" class="form-control" name="amount" id="amount"
-                                    min="500"
-                                    required>
-                                <span class="text-danger"><?= $_SESSION['errors']['amount'] ?? '' ?></span>
-                            </div>
-
-                            <div class="form-group col-lg-12">
-                                <label for="phone">Select Payment method *</label>
-                            </div>
-                            <div class="form-row mt-0 pt-0">
-                                <div class="form-group col-lg-12">
-
-                                    <input type="radio" name="paymentmode" value="UGMTNMOMODIR" id="mtnCheck" onclick="javascript:paymentCheck();" required>
-                                    <img alt="" width="70" src="logos/mtn.png">
-
-                                    &nbsp;&nbsp;
-                                    &nbsp;&nbsp;
-                                    &nbsp;&nbsp;
-                                    <input type="radio" name="paymentmode" value="UGAIRTELMO" id="airtelCheck" onclick="javascript:paymentCheck();">
-                                    <img alt="" width="70" src="logos/airtel.fw.png">
-
-
-                                    &nbsp;&nbsp;
-                                    &nbsp;&nbsp;
-                                    &nbsp;&nbsp;
-                                    <input type="radio" name="paymentmode" value="UGXPRESSPAY" id="visaCheck2" onclick="javascript:paymentCheck();">
-                                    <img alt="" width="70" src="logos/visa2.jpg">
-
+                                <div class="form-row mt-2">
+                                    <br>
+                                    <div class="form-group col-12 mt-3">
+                                        <input type="submit" name="donate" value="Pay Now" class="btn btn-primary btn-block  btn-lg w-100" data-loading-text="Loading...">
+                                    </div>
+                                    <p class="text-center">
+                                        <a href="donate.php" class="">Edit Information</a>
+                                    </p>
 
                                 </div>
-
-                            </div>
-
-
-                            <div class="form-row mt-2">
-                                <br>
-                                <div class="form-group col-12 mt-3">
-                                    <input type="submit" name="donate" value="Process Payment" class="btn btn-primary btn-block  btn-lg w-100" data-loading-text="Loading...">
-                                </div>
-                            </div>
 
                         </form>
                     </div>
