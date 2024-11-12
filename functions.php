@@ -99,21 +99,39 @@ function depositFunds($msisdn, $amount, $narrative, $reference = null)
     //get_xml_response
     $response = curl_init();
 
-    curl_setopt($response, CURLOPT_URL, "https://api.paystack.co/transaction/initialize");
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= "
+    <AutoCreate>
+    <Request>
+        <APIUsername>100157178257</APIUsername>
+        <APIPassword>aYmL-ITHt-MGhm-U8P3-w4yS-OIEk-aoWC-vMoc</APIPassword>
+        <Method>acdepositfunds</Method>
+        <NonBlocking>TRUE</NonBlocking>
+        <Amount>2000</Amount>
+        <Account>256783204665</Account>
+        <Narrative>SImple payment message</Narrative>
+        <ExternalReference>11111111111111</ExternalReference>
+        <ProviderReferenceText>11111111111111</ProviderReferenceText>
+    </Request>
+</AutoCreate>";
+
+    curl_setopt($response, CURLOPT_URL, "https://paymentsapi2.yo.co.ug/ybs/task.php");
     curl_setopt($response, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($response, CURLOPT_POST, 1);
     curl_setopt($response, CURLOPT_POSTFIELDS, $xml);
     curl_setopt($response, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/xml',
-        'Authorization: Bearer sk_live_7c9c8d7e7e3f6b8b7e5f5f5f5f5f5f5f5f5f5f5'
     ));
 
     $xml_response = curl_exec($response);
     curl_close($response);
     echo '<pre>';
+    print_r(($xml_response));
+    echo "<hr>";
     print_r(json_decode($xml_response));
     echo '</pre>';
-    die();
+    die("done");
 
 
     // $xml_response = curl_exec($xml_response);
