@@ -16,7 +16,11 @@ $amount = $_SESSION['form']['amount'];
 $description1 = $_SESSION['form']['description1'];
 $msg = "$first_name $last_name donated $description1 $amount to Salam Charity";
 
-depositFunds($phone, $amount, $msg);
+try {
+    depositFunds($phone, $amount, $msg);
+} catch (\Throwable $th) {
+    throw $th;
+}
 /*
     +256783204665
     [first_name] => Muhindo
