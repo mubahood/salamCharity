@@ -54,15 +54,18 @@ function depositFunds($msisdn, $amount, $narrative, $reference = null)
     $xml .= '<Account>' . $msisdn . '</Account>';
     $xml .= '<Amount>' . $amount . '</Amount>';
     $xml .= '<Narrative>' . $narrative . '</Narrative>';
-    
+
     if ($reference != NULL) {
         $xml .= '<ExternalReference>' . $reference . '</ExternalReference>';
+    } else {
+        $ref = 'Deposit' . rand(100000, 999999);
+        $xml .= '<ExternalReference>' . $ref . '</ExternalReference>';
     }
-    
+
     $xml .= '</Request>';
     $xml .= '</AutoCreate>';
 
-   
+
 
     //get_xml_response
     $response = curl_init();
