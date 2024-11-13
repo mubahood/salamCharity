@@ -100,28 +100,14 @@ function depositFunds($msisdn, $amount, $narrative, $reference = null)
     $response = curl_init();
 
 
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml .= "
-    <AutoCreate>
-    <Request>
-        <APIUsername>100157178257</APIUsername>
-        <APIPassword>aYmL-ITHt-MGhm-U8P3-w4yS-OIEk-aoWC-vMoc</APIPassword>
-        <Method>acdepositfunds</Method>
-        <NonBlocking>TRUE</NonBlocking>
-        <Amount>2000</Amount>
-        <Account>256783204665</Account>
-        <Narrative>SImple payment message</Narrative>
-        <ExternalReference>11111111111111</ExternalReference>
-        <ProviderReferenceText>11111111111111</ProviderReferenceText>
-    </Request>
-</AutoCreate>";
 
-    curl_setopt($response, CURLOPT_URL, "https://paymentsapi2.yo.co.ug/ybs/task.php");
+
+    curl_setopt($response, CURLOPT_URL, "https://paymentsapi1.yo.co.ug/ybs/task.php");
     curl_setopt($response, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($response, CURLOPT_POST, 1);
     curl_setopt($response, CURLOPT_POSTFIELDS, $xml);
     curl_setopt($response, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/xml',
+        'Content-Type: text/xml',
     ));
 
     $xml_response = curl_exec($response);
