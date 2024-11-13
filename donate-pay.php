@@ -13,10 +13,10 @@ $first_name = $_SESSION['form']['first_name'];
 $last_name = $_SESSION['form']['last_name'];
 $email = $_SESSION['form']['email'];
 $amount = $_SESSION['form']['amount'];
+$description1 = $_SESSION['form']['description1'];
+$msg = "$first_name $last_name donated $description1 $amount to Salam Charity";
 
-depositFunds('zakat', $phone, $amount);
-die($phone);
-die($amount);
+depositFunds($phone, $amount, $msg);
 /*
     +256783204665
     [first_name] => Muhindo
@@ -184,7 +184,7 @@ die($amount);
     <div class="container mb-0 pb-0" style="margin-top: 3rem; margin-bottom: 1rem!important; padding-bottom: 2rem">
         <div class="row">
             <div class="col-sm-12 ">
-                <h1 class="text-center ">Confirm Payment Information</h1>
+                <h3 class="text-center ">Enter your Mobile Money PIN to complete the payment.</h3>
             </div>
         </div>
     </div>
@@ -194,29 +194,12 @@ die($amount);
         <div class="container ">
             <div class="row">
                 <div class="col-md-12 left-block">
-                    <div class="cnt-block">
-                        <form action="donate-pay.php" method="POST" name="donateform">
-
-                            <div class="form-row">
-
-                                <p style="padding: 0rem; margin: 0rem"><b>First Name:</b> <?php echo $first_name; ?></p>
-                                <p style="padding: 0rem; margin: 0rem"><b>Last Name:</b> <?php echo $last_name; ?></p>
-                                <p style="padding: 0rem; margin: 0rem"><b>Email:</b> <?php echo $email; ?></p>
-                                <p style="padding: 0rem; margin: 0rem"><b>Phone:</b> <?php echo $phone; ?></p>
-                                <p style="padding: 0rem; margin: 0rem"><b>Amount:</b> <?php echo $amount; ?></p>
-
-                                <div class="form-row mt-2">
-                                    <br>
-                                    <div class="form-group col-12 mt-3">
-                                        <input type="submit" name="donate" value="Pay Now" class="btn btn-primary btn-block  btn-lg w-100" data-loading-text="Loading...">
-                                    </div>
-                                    <p class="text-center">
-                                        <a href="donate.php" class="">Edit Information</a>
-                                    </p>
-
-                                </div>
-
-                        </form>
+                    <div class="cnt-block text-center">
+                        <p>Thank you for your donation. Your donation will help us to continue our causes in Uganda. </p>
+                        <p>For any inquiries, please contact us at </p>
+                        <br>
+                        <!-- back home link -->
+                        <a href="/" class="btn btn-primary">Back to Home</a>
                     </div>
                 </div>
             </div>

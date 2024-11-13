@@ -42,6 +42,7 @@ function phone_number_is_valid($phone_number)
 
 function depositFunds($msisdn, $amount, $narrative, $reference = null)
 {
+    $msisdn = str_replace("+", "", $msisdn);
     $xml = '';
     $xml .= '<?xml version="1.0" encoding="UTF-8"?>';
     $xml .= '<AutoCreate>';
@@ -50,51 +51,18 @@ function depositFunds($msisdn, $amount, $narrative, $reference = null)
     $xml .= '<APIPassword>' . 'aYmL-ITHt-MGhm-U8P3-w4yS-OIEk-aoWC-vMoc' . '</APIPassword>';
     $xml .= '<Method>acdepositfunds</Method>';
     $xml .= '<NonBlocking>TRUE</NonBlocking>';
-    $xml .= '<Account>' . '256783204665' . '</Account>';
-    $xml .= '<Amount>' . '1000' . '</Amount>';
-    $xml .= '<Narrative>' . "simple message" . '</Narrative>';
-    /*
-    <AutoCreate>
-        <Request>
-            <APIUsername></APIUsername>
-            <APIPassword></APIPassword>
-            <Method>acdepositfunds</Method>
-            <NonBlocking></NonBlocking>
-            <Amount></Amount>
-            <Account></Account>
-            <AccountProviderCode></AccountProviderCode>
-            <Narrative></Narrative>
-            <NarrativeFileName></NarrativeFileName>
-            <NarrativeFileBase64></NarrativeFileBase64>
-            <InternalReference></InternalReference>
-            <ExternalReference></ExternalReference>
-            <ProviderReferenceText></ProviderReferenceText>
-            <InstantNotificationUrl></InstantNotificationUrl>
-            <FailureNotificationUrl></FailureNotificationUrl>
-            <AuthenticationSignatureBase64></AuthenticationSignatureBase64>
-        </Request>
-    </AutoCreate>
-    */
+    $xml .= '<Account>' . $msisdn . '</Account>';
+    $xml .= '<Amount>' . $amount . '</Amount>';
+    $xml .= '<Narrative>' . $narrative . '</Narrative>';
+    
     if ($reference != NULL) {
         $xml .= '<ExternalReference>' . $reference . '</ExternalReference>';
     }
-    // if ($this->internal_reference != NULL) {
-    //     $xml .= '<InternalReference>' . $this->internal_reference . '</InternalReference>';
-    // }
-    // if ($this->provider_reference_text != NULL) {
-    //     $xml .= '<ProviderReferenceText>' . $this->provider_reference_text . '</ProviderReferenceText>';
-    // }
-    // if ($this->instant_notification_url != NULL) {
-    //     $xml .= '<InstantNotificationUrl>' . $this->instant_notification_url . '</InstantNotificationUrl>';
-    // }
-    // if ($this->failure_notification_url != NULL) {
-    //     $xml .= '<FailureNotificationUrl>' . $this->failure_notification_url . '</FailureNotificationUrl>';
-    // }
-    // if ($this->authentication_signature_base64 != NULL) {
-    //     $xml .= '<AuthenticationSignatureBase64>' . $this->authentication_signature_base64 . '</AuthenticationSignatureBase64>';
-    // }
+    
     $xml .= '</Request>';
     $xml .= '</AutoCreate>';
+
+   
 
     //get_xml_response
     $response = curl_init();
@@ -111,13 +79,14 @@ function depositFunds($msisdn, $amount, $narrative, $reference = null)
     ));
 
     $xml_response = curl_exec($response);
-    curl_close($response);
-    echo '<pre>';
-    print_r(($xml_response));
-    echo "<hr>";
-    print_r(json_decode($xml_response));
-    echo '</pre>';
-    die("done");
+    // curl_close($response);
+    // echo '<pre>';
+    // print_r(($xml_response));
+    // echo "<hr>";
+    // print_r(json_decode($xml_response));
+    // echo '</pre>';
+    // die("done");
+    return $xml_response;
 
 
     // $xml_response = curl_exec($xml_response);

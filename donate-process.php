@@ -210,7 +210,7 @@ $_SESSION['form']['phone'] = $phone;
     <div class="container mb-0 pb-0" style="margin-top: 3rem; margin-bottom: 1rem!important; padding-bottom: 2rem">
         <div class="row">
             <div class="col-sm-12 ">
-                <h1 class="text-center ">Confirm Payment Information</h1>
+                <h3 class="text-center ">Confirm Payment Information</h3>
             </div>
         </div>
     </div>
@@ -230,6 +230,15 @@ $_SESSION['form']['phone'] = $phone;
                                 <p style="padding: 0rem; margin: 0rem"><b>Email:</b> <?php echo $email; ?></p>
                                 <p style="padding: 0rem; margin: 0rem"><b>Phone:</b> <?php echo $phone; ?></p>
                                 <p style="padding: 0rem; margin: 0rem"><b>Amount:</b> <?php echo $amount; ?></p>
+
+                                <!-- hidden form -->
+                                <input type="hidden" name="first_name" value="<?php echo $first_name; ?>">
+                                <input type="hidden" name="last_name" value="<?php echo $last_name; ?>">
+                                <input type="hidden" name="email" value="<?php echo $email; ?>">
+                                <input type="hidden" name="phone" value="<?php echo $phone; ?>">
+                                <input type="hidden" name="amount" value="<?php echo $amount; ?>">
+                                <input type="hidden" name="description1" value="<?php echo $description1; ?>">
+                                
 
                                 <div class="form-row mt-2">
                                     <br>
