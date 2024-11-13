@@ -17,7 +17,8 @@ $description1 = $_SESSION['form']['description1'];
 $msg = "$first_name $last_name donated $description1 $amount to Salam Charity";
 
 try {
-    depositFunds($phone, $amount, $msg);
+    $reference = time().rand(100000, 9999000)."";
+    depositFunds($phone, $amount, $msg,$reference);
 } catch (\Throwable $th) {
     throw $th;
 }
