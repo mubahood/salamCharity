@@ -1,4 +1,4 @@
-﻿R<?php
+﻿<?php
     //include function file
     include('functions.php');
     $error_message = null;
