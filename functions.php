@@ -83,12 +83,12 @@ function depositFunds($msisdn, $amount, $narrative, $reference = null)
 
     $xml_response = curl_exec($response);
     curl_close($response);
-    echo '<pre>';
+    /* echo '<pre>';
     print_r(($xml_response));
     echo "<hr>";
     print_r(json_decode($xml_response));
     echo '</pre>';
-    die("done");
+    die("done"); */
     return $xml_response;
 
 

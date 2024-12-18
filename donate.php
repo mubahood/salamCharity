@@ -191,30 +191,27 @@ include('functions.php');
                         <form action="donate-process.php" method="POST" name="donateform">
 
                             <div class="form-group col-lg-6">
-                                <label for="first_name">First Name *</label>
+                                <label for="first_name">Your Name *</label>
                                 <input name="first_name" type="text" required="required" class="form-control" id="first_name" data-msg-required="Please enter your First Name."
                                     value="<?= $_SESSION['form']['first_name'] ?? '' ?>" />
                                 <span class="text-danger"><?= $_SESSION['errors']['first_name'] ?? '' ?></span>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <label for="last_name">Last Name *</label>
-                                <input name="last_name" type="text" required="required" class="form-control" id="last_name" data-msg-required="Please enter your Last Name."
-                                    value="<?= $_SESSION['form']['last_name'] ?? '' ?>" />
-                                <span class="text-danger"><?= $_SESSION['errors']['last_name'] ?? '' ?></span>
-                            </div>
 
-                            <div class="form-group col-lg-6">
-                                <label>Email</label>
-                                <input type="email"
-                                    value="<?= $_SESSION['form']['email'] ?? '' ?>"
-                                    data-msg-required="Please enter your Email." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email">
-                            </div>
                             <div class="form-group col-lg-6">
                                 <label for="phone">Phone Number *</label>
                                 <input type="text"
                                     value="<?= $_SESSION['form']['phone'] ?? '' ?>"
                                     data-msg-required="Please enter your Phone Number." data-msg-email="Please enter your Phone Number." maxlength="100" class="form-control" name="phone" id="phone" required>
                             </div>
+
+                            <!--  <div class="form-group col-lg-6">
+                                <label for="last_name">Last Name *</label>
+                                <input name="last_name" type="text" required="required" class="form-control" id="last_name" data-msg-required="Please enter your Last Name."
+                                    value="<?= $_SESSION['form']['last_name'] ?? '' ?>" />
+                                <span class="text-danger"><?= $_SESSION['errors']['last_name'] ?? '' ?></span>
+                            </div> -->
+
+
 
                             <div class="form-group col-lg-6">
                                 <label>Select Campaign*</label>
@@ -236,7 +233,7 @@ include('functions.php');
                                 <span class="text-danger"><?= $_SESSION['errors']['amount'] ?? '' ?></span>
                             </div>
 
-                            <div class="form-group col-lg-12">
+                            <!--  <div class="form-group col-lg-12">
                                 <label for="phone">Select Payment method *</label>
                             </div>
                             <div class="form-row mt-0 pt-0">
@@ -261,7 +258,7 @@ include('functions.php');
 
                                 </div>
 
-                            </div>
+                            </div> -->
 
 
                             <div class="form-row mt-2">

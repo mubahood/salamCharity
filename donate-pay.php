@@ -10,11 +10,9 @@ if (!phone_number_is_valid($phone)) {
     exit();
 }
 $first_name = $_SESSION['form']['first_name'];
-$last_name = $_SESSION['form']['last_name'];
-$email = $_SESSION['form']['email'];
 $amount = $_SESSION['form']['amount'];
 $description1 = $_SESSION['form']['description1'];
-$msg = "$first_name $last_name donated $description1 $amount to Salam Charity";
+$msg = "$first_name donated $description1 $amount to Salam Charity";
 
 try {
     $reference = time().rand(100000, 9999000)."";

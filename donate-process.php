@@ -16,12 +16,7 @@ $_SESSION['form'] = $_POST;
 if ($_POST['first_name'] == null || strlen($_POST['first_name']) < 2) {
     $_SESSION['errors']['first_name'] = "Please enter your first name";
 }
-if ($_POST['last_name'] == null || strlen($_POST['last_name']) < 2) {
-    $_SESSION['errors']['last_name'] = "Please enter your last name";
-}
-if ($_POST['email'] == null || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    $_SESSION['errors']['email'] = "Please enter a valid email address";
-}
+
 if ($_POST['phone'] == null || strlen($_POST['phone']) < 10) {
     $_SESSION['errors']['phone'] = "Please enter your phone number";
 }
@@ -47,11 +42,7 @@ if (!phone_number_is_valid($phone)) {
 }
 
 $first_name = $_POST['first_name'];
-$last_name = $_POST['last_name'];
-$email = $_POST['email'];
-$description1 = $_POST['description1'];
 $amount = $_POST['amount'];
-$paymentmode = $_POST['paymentmode'];
 $donate = $_POST['donate'];
 $_SESSION['form']['phone'] = $phone;
 
@@ -221,23 +212,20 @@ $_SESSION['form']['phone'] = $phone;
             <div class="row">
                 <div class="col-md-12 left-block">
                     <div class="cnt-block">
-                        <form action="donate-pay.php" method="POST" name="donateform">
+                        <form action="donate-pay.php" method="post" name="donateform">
 
                             <div class="form-row">
 
-                                <p style="padding: 0rem; margin: 0rem"><b>First Name:</b> <?php echo $first_name; ?></p>
-                                <p style="padding: 0rem; margin: 0rem"><b>Last Name:</b> <?php echo $last_name; ?></p>
-                                <p style="padding: 0rem; margin: 0rem"><b>Email:</b> <?php echo $email; ?></p>
+                                <p style="padding: 0rem; margin: 0rem"><b>Name:</b> <?php echo $first_name; ?></p>
                                 <p style="padding: 0rem; margin: 0rem"><b>Phone:</b> <?php echo $phone; ?></p>
                                 <p style="padding: 0rem; margin: 0rem"><b>Amount:</b> <?php echo $amount; ?></p>
+                                <p style="padding: 0rem; margin: 0rem"><b>Payment For:</b> <?php echo $_POST['description1']; ?></p>
 
                                 <!-- hidden form -->
                                 <input type="hidden" name="first_name" value="<?php echo $first_name; ?>">
-                                <input type="hidden" name="last_name" value="<?php echo $last_name; ?>">
-                                <input type="hidden" name="email" value="<?php echo $email; ?>">
                                 <input type="hidden" name="phone" value="<?php echo $phone; ?>">
                                 <input type="hidden" name="amount" value="<?php echo $amount; ?>">
-                                <input type="hidden" name="description1" value="<?php echo $description1; ?>">
+                                
                                 
 
                                 <div class="form-row mt-2">
@@ -248,9 +236,7 @@ $_SESSION['form']['phone'] = $phone;
                                     <p class="text-center">
                                         <a href="donate.php" class="">Edit Information</a>
                                     </p>
-
                                 </div>
-
                         </form>
                     </div>
                 </div>
