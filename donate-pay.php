@@ -1,5 +1,7 @@
 ﻿<?php
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
+}
 //include function file
 include('functions.php');
 $error_message = null;
@@ -34,8 +36,7 @@ try {
 */
 
 
-?>
-<!doctype html>
+?><!doctype html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
