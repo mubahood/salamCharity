@@ -1,26 +1,26 @@
-﻿<?php
-//include function file
-include('functions.php');
-$error_message = null;
-$phone = $_SESSION['form']['phone'];
-$phone = prepare_phone_number($phone);
-if (!phone_number_is_valid($phone)) {
-    $error_message = "Invalid phone number";
-    header("Location: donate.php?error_message=$error_message");
-    exit();
-}
-$first_name = $_SESSION['form']['first_name'];
-$amount = $_SESSION['form']['amount'];
-$description1 = $_SESSION['form']['description1'];
-$msg = "$first_name donated $description1 $amount to Salam Charity";
+﻿R<?php
+    //include function file
+    include('functions.php');
+    $error_message = null;
+    $phone = $_SESSION['form']['phone'];
+    $phone = prepare_phone_number($phone);
+    if (!phone_number_is_valid($phone)) {
+        $error_message = "Invalid phone number";
+        header("Location: donate.php?error_message=$error_message");
+        exit();
+    }
+    $first_name = $_SESSION['form']['first_name'];
+    $amount = $_SESSION['form']['amount'];
+    $description1 = $_SESSION['form']['description1'];
+    $msg = "$first_name donated $description1 $amount to Salam Charity";
 
-try {
-    $reference = time().rand(100000, 9999000)."";
-    depositFunds($phone, $amount, $msg,$reference);
-} catch (\Throwable $th) {
-    throw $th;
-}
-/*
+    try {
+        $reference = time() . rand(100000, 9999000) . "";
+        depositFunds($phone, $amount, $msg, $reference);
+    } catch (\Throwable $th) {
+        throw $th;
+    }
+    /*
     +256783204665
     [first_name] => Muhindo
     [last_name] => Mubaraka
@@ -33,7 +33,7 @@ try {
 */
 
 
-?>
+    ?>
 <!doctype html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
