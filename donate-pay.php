@@ -1,6 +1,5 @@
 ﻿<?php
     include('functions.php');
-    die("done");
     $error_message = null;
     $phone = $_SESSION['form']['phone'];
     $phone = prepare_phone_number($phone);
