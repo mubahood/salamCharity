@@ -217,9 +217,11 @@ include('functions.php');
                                 <label>Select Campaign*</label>
                                 <select id="description1" name="description1" class="form-control" required="">
                                     <option value="">Select Campaign</option>
+                                    <option value="Quran">1000/= Quran Project</option>
                                     <option value="charity">Zakat</option>
                                     <option value="charity">Waqf</option>
                                     <option value="donation">Donation</option>
+
                                 </select>
                             </div>
 
